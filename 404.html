@@ -275,11 +275,11 @@
 <header>
         <div class="header-container">
             <div class="brand-layout">
-                <span>🏆 Cuadro de Honor IPCHILE</span>
+                <span>🏆 Tabla de Líderes IPCHILE</span>
             </div>
             <div class="title-layout">
                 <h1>Podio de Excelencia Académica</h1>
-                <p>Top 3 Histórico de Evaluaciones Simuladas &bull; 2026</p>
+                <p>Top 3 de Evaluaciones Simuladas &bull; 2026</p>
             </div>
         </div>
     </header>
@@ -329,7 +329,6 @@
     </div>
 
     <script>
-        // CONFIGURACIÓN DE LAS URLS DE GOOGLE SHEETS ENVIADAS POR EL USUARIO
         const URL_NORMATIVA = "https://script.google.com/macros/s/AKfycbxXuHwc-oPc9Sf3sXf2M9HCkLjiuEEn0uLmRVn3EzNvFtihGtrI8PgtlRP5FBLWaj4EWw/exec";
         const URL_INSTRUMENTACION = "https://script.google.com/macros/s/AKfycbw46HZO4J-9mJonYU_qB_fkW27jjZs6F-TO67abPBwksyknCi8Yu-eNT9WZpNsrHhSG/exec";
 
@@ -338,7 +337,15 @@
             renderPodio(URL_INSTRUMENTACION, "podio-instrumentacion");
         };
 
-        // CORRECCIÓN CRÍTICA: Sintaxis válida de función asíncrona estándar
+        // Función auxiliar para convertir el string "MM:SS" a un valor numérico total en segundos
+        function convertirTiempoASegundos(tiempoStr) {
+            if (!tiempoStr || !tiempoStr.includes(':')) return 999999; // Si no hay tiempo válido, lo manda al final
+            const partes = tiempoStr.split(':');
+            const minutos = parseInt(partes[0], 10) || 0;
+            const segundos = parseInt(partes[1], 10) || 0;
+            return (minutos * 60) + segundos;
+        }
+
         async function renderPodio(url, elementId) {
             const container = document.getElementById(elementId);
             try {
@@ -353,7 +360,22 @@
                     return;
                 }
 
-                // Tus scripts de Apps Script ya ordenan y cortan, pero forzamos el Top 3 por si acaso
+                // ORDENAMIENTO COMPUESTO REQUERIDO: 
+                // 1º Por Nota (De Mayor a Menor)
+                // 2º Por Tiempo (De Menor a Mayor en caso de notas iguales)
+                data.sort((a, b) => {
+                    const notaA = parseFloat(String(a.nota).replace(',', '.'));
+                    const notaB = parseFloat(String(b.nota).replace(',', '.'));
+
+                    if (notaB !== notaA) {
+                        return notaB - notaA; // Ordena descendente por nota
+                    } else {
+                        // Si las notas son idénticas, desempata por tiempo (menor tiempo es mejor)
+                        return convertirTiempoASegundos(a.tiempo) - convertirTiempoASegundos(b.tiempo);
+                    }
+                });
+
+                // Extraemos estrictamente a los 3 mejores tras el nuevo ordenamiento compuesto
                 const top3 = data.slice(0, 3);
 
                 top3.forEach((alumno, index) => {
@@ -365,7 +387,6 @@
                     const fila = document.createElement('tr');
                     fila.className = "leaderboard-row";
                     
-                    // Manejo del cambio de coma a punto decimal para validar aprobaciones
                     const notaNumerica = parseFloat(String(alumno.nota).replace(',', '.'));
                     const colorNota = notaNumerica >= 4.0 ? 'var(--success-color)' : 'var(--error-color)';
 
