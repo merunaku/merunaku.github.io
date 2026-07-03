@@ -18,7 +18,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        /* Barra superior corregida para evitar excesiva separación */
+        /* Barra superior institucional agrupada a la izquierda */
         .navbar {
             background-color: #004077; 
             border-bottom: 4px solid #f2ae1b; 
@@ -26,8 +26,8 @@
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: center; /* Agrupa todo al centro */
-            gap: 20px; /* Controla la distancia exacta entre el logo y el texto */
+            justify-content: flex-start;
+            gap: 20px;
         }
         .brand {
             display: flex;
@@ -42,7 +42,7 @@
         }
         .nav-title {
             text-align: left;
-            border-left: 1px solid rgba(255,255,255,0.3); /* Línea divisoria sutil */
+            border-left: 1px solid rgba(255,255,255,0.3);
             padding-left: 20px;
         }
         .nav-title h2 {
@@ -81,7 +81,7 @@
             margin-bottom: 25px;
             line-height: 1.5;
         }
-        /* Grupo de botones unificados en azul */
+        /* Grupo de botones unificados en azul institucional */
         .button-group {
             display: flex;
             flex-direction: column;
@@ -102,43 +102,19 @@
             background-color: #002d54;
         }
     </style>
+    <script>
+        // Captura la URL errónea escrita por el alumno
+        var urlIncorrecta = window.location.href.toLowerCase();
 
-      <script>
-        // Conservamos la URL original con sus mayúsculas y minúsculas tal cual se escribieron
-        var originalUrl = window.location.href;
-        // Creamos una versión en minúsculas solo para la detección de la palabra clave
-        var lowerUrl = originalUrl.toLowerCase();
-
-        // 1. Si el alumno escribió mal las mayúsculas de Instrumentación
-        if (lowerUrl.includes("/instind2026") && !originalUrl.includes("/InstInd2026")) {
-            window.location.replace("https://github.io");
+        // Redirección inmediata según la palabra clave detectada
+        if (urlIncorrecta.includes("instind")) {
+            window.location.replace("https://merunaku.github.io/InstInd2026/");
         } 
-        // 2. Si el alumno escribió mal las mayúsculas de Normativa
-        else if (lowerUrl.includes("/normativa2026") && !originalUrl.includes("/Normativa2026")) {
-            window.location.replace("https://github.io");
+        else if (urlIncorrecta.includes("normativa")) {
+            window.location.replace("https://merunaku.github.io/Normativa2026/");
         }
-        // 3. Si el alumno escribió mal las mayúsculas de la Calculadora
-        else if (lowerUrl.includes("/calculadora2026") && !originalUrl.includes("/calculadora2026")) {
-            window.location.replace("https://github.io");
-        }
-    </script>
-</head>
-<body>
-
-    <header class="navbar">
-        <div class="brand">
-            <img src="/logo.p   <script>
-        // Redirecciones automáticas silenciosas en caso de errores de tipeo en la URL
-        var currentUrl = window.location.href.toLowerCase();
-
-        if (currentUrl.includes("/instind2026")) {
-            window.location.replace("https://github.io");
-        } 
-        else if (currentUrl.includes("/normativa2026")) {
-            window.location.replace("https://github.io");
-        }
-        else if (currentUrl.includes("/calculadora2026")) {
-            window.location.replace("https://github.io");
+        else if (urlIncorrecta.includes("calculadora")) {
+            window.location.replace("https://merunaku.github.io/calculadora2026/");
         }
     </script>
 </head>
@@ -147,11 +123,6 @@
     <header class="navbar">
         <div class="brand">
             <img src="/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
-            <span>ProfeDiego</span>
-        </div>
-        <div class="nav-title">
-            <h2>Plataforma de Estudios 2026</h2>
-            <p>Portal deng" alt="Logo ProfeDiego" onerror="this.style.display='none'">
             <span>ProfeDiego</span>
         </div>
         <div class="nav-title">
@@ -166,17 +137,18 @@
             <p>Por favor, selecciona la asignatura o herramienta a la que deseas acceder para comenzar. ¡Mucho éxito en tu evaluación!</p>
             
             <div class="button-group">
-                <a href="https://github.io" class="btn">
+                <a href="https://merunaku.github.io/InstInd2026/" class="btn">
                     Instrumentación Industrial 2026
                 </a>
-                <a href="https://github.io" class="btn">
+                <a href="https://merunaku.github.io/Normativa2026/" class="btn">
                     Normativa 2026
                 </a>
-                <a href="https://github.io" class="btn">
+                <a href="https://merunaku.github.io/calculadora2026/" class="btn">
                     Calculadora 2026
                 </a>
             </div>
         </div>
     </main>
+
 </body>
 </html>
