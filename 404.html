@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Redireccionando al Simulador...</title>
+    <script>
+        var currentUrl = window.location.href;
+        // Si el alumno escribió el repositorio en minúsculas, lo corregimos
+        if (currentUrl.toLowerCase().includes("/instind2026")) {
+            window.location.replace("https://merunaku.github.io/InstInd2026/");
+        } else {
+            document.write("<h1>Página no encontrada. Verifica el enlace.</h1>");
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
