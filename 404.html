@@ -14,6 +14,8 @@
             --bg-color: #f7f9fc;
             --card-bg: #ffffff;
             --text-color: #2c3e50;
+            --success-color: #16a34a;
+            --error-color: #dc2626;
         }
 
         body {
@@ -37,7 +39,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ENCABEZADO INSTITUCIONAL MEJORADO CON CONTRAS TE DE ALTA GAMA */
+        /* ENCABEZADO INSTITUCIONAL MEJORADO CON CONTRASTE DE ALTA GAMA */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: white;
@@ -100,13 +102,12 @@
             .title-layout { text-align: center; }
         }
 
-        /* CONTENEDOR CENTRAL - GLASSMORPHISM PREMIUM */
+        /* CONTENEDOR CENTRAL - GLASSMORPHISM PREMIUM (MENÚ DE ARRIBA) */
         .container {
             width: 90%;
             max-width: 550px;
-            margin: auto 0;
-            padding: 40px 0;
-            flex-grow: 1;
+            margin: 20px 0;
+            padding: 20px 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -192,10 +193,6 @@
             box-shadow: 0 12px 20px rgba(244, 178, 35, 0.15);
         }
 
-        .btn-link:active {
-            transform: translateY(-1px);
-        }
-
         /* RETORNO AL PORTAL ESTILO CÁPSULA DISCRETA */
         .btn-home {
             display: inline-flex;
@@ -217,11 +214,99 @@
             background-color: #f1f5f9;
             border-color: #e2e8f0;
         }
+
+        /* ------------------------------------------------------------- */
+        /* NUEVOS ESTILOS EXCLUSIVOS PARA LA TABLA DE LÍDERES (EVITA COLISIONES) */
+        /* ------------------------------------------------------------- */
+        
+        .leaderboard-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        @media (max-width: 500px) {
+            .leaderboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .leaderboard-card {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px -12px rgba(0, 43, 92, 0.1), 0 10px 25px -10px rgba(0, 0, 0, 0.04);
+            padding: 35px 25px;
+            box-sizing: border-box;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+            align-self: start;
+        }
+
+        .leaderboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .leaderboard-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .leaderboard-table {
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 8px;
+            font-size: 0.95rem;
+        }
+        
+        .leaderboard-table th {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 12px 10px;
+            font-weight: 700;
+        }
+        
+        .leaderboard-table th:first-child { border-radius: 10px 0 0 10px; }
+        .leaderboard-table th:last-child { border-radius: 0 10px 10px 0; }
+
+        .leaderboard-row td {
+            padding: 14px 10px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+        }
+        
+        .leaderboard-row td:first-child { border-left: 1px solid #e2e8f0; border-radius: 14px 0 0 14px; }
+        .leaderboard-row td:last-child { border-right: 1px solid #e2e8f0; border-radius: 0 14px 14px 0; }
+
+        .leaderboard-row:hover td {
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .loading, .error-msg {
+            text-align: center;
+            padding: 30px;
+            font-weight: 700;
+            color: #64748b;
+        }
+        .error-msg { color: var(--error-color); }
     </style>
     <script>
-        // Lógica automática de enrutamiento inmediato intacta
+        // Lógica de enrutamiento automático
         var urlIncorrecta = window.location.href.toLowerCase();
-
         if (urlIncorrecta.includes("calculadora")) {
             window.location.replace("https://merunaku.github.io/calculadora2026/");
         }
@@ -271,25 +356,21 @@
         </div>
     </main>
 
-
-    
-<header style="background: linear-gradient(135deg, #002b5c 0%, #001a38 100%); color: white; width: 100%; padding: 22px 0; box-shadow: 0 4px 20px rgba(0, 43, 92, 0.15); border-bottom: 5px solid #f4b223; z-index: 10;">
-    <div style="max-width: 1000px; width: 90%; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <span style="font-weight: 900; font-size: 1.4rem; letter-spacing: 0.5px;">🏆 Tabla de Líderes IPCHILE</span>
+    <header style="background: linear-gradient(135deg, #002b5c 0%, #001a38 100%); color: white; width: 100%; padding: 22px 0; box-shadow: 0 4px 20px rgba(0, 43, 92, 0.15); border-bottom: 5px solid #f4b223; z-index: 10;">
+        <div style="max-width: 1000px; width: 90%; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span style="font-weight: 900; font-size: 1.4rem; letter-spacing: 0.5px;">🏆 Tabla de Líderes IPCHILE</span>
+            </div>
+            <div style="text-align: center;">
+                <h1 style="margin: 0; font-size: 1.6rem; font-weight: 900;">Podio de Excelencia Académica</h1>
+                <p style="margin: 4px 0 0 0; font-size: 0.95rem; font-weight: 700; color: #cbd5e1;">Top 3 de Evaluaciones Simuladas &bull; 2026</p>
+            </div>
         </div>
-        <div style="text-align: center;">
-            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 900;">Podio de Excelencia Académica</h1>
-            <p style="margin: 4px 0 0 0; font-size: 0.95rem; font-weight: 700; color: #cbd5e1;">Top 3 de Evaluaciones Simuladas &bull; 2026</p>
-        </div>
-    </div>
-</header>
+    </header>
 
-    
-
-    <div class="container">
+    <div class="leaderboard-container">
         
-        <div class="card">
+        <div class="leaderboard-card">
             <h2>📜 Normativa Industrial</h2>
             <table class="leaderboard-table">
                 <thead>
@@ -309,7 +390,7 @@
             </table>
         </div>
 
-        <div class="card">
+        <div class="leaderboard-card">
             <h2>⚡ Instrumentación Industrial</h2>
             <table class="leaderboard-table">
                 <thead>
@@ -335,14 +416,13 @@
         const URL_NORMATIVA = "https://script.google.com/macros/s/AKfycbxXuHwc-oPc9Sf3sXf2M9HCkLjiuEEn0uLmRVn3EzNvFtihGtrI8PgtlRP5FBLWaj4EWw/exec";
         const URL_INSTRUMENTACION = "https://script.google.com/macros/s/AKfycbw46HZO4J-9mJonYU_qB_fkW27jjZs6F-TO67abPBwksyknCi8Yu-eNT9WZpNsrHhSG/exec";
 
-        window.onload = () => {
+        window.addEventListener('DOMContentLoaded', () => {
             renderPodio(URL_NORMATIVA, "podio-normativa");
             renderPodio(URL_INSTRUMENTACION, "podio-instrumentacion");
-        };
+        });
 
-        // Función auxiliar para convertir el string "MM:SS" a un valor numérico total en segundos
         function convertirTiempoASegundos(tiempoStr) {
-            if (!tiempoStr || !tiempoStr.includes(':')) return 999999; // Si no hay tiempo válido, lo manda al final
+            if (!tiempoStr || !tiempoStr.includes(':')) return 999999;
             const partes = tiempoStr.split(':');
             const minutos = parseInt(partes[0], 10) || 0;
             const segundos = parseInt(partes[1], 10) || 0;
@@ -363,22 +443,18 @@
                     return;
                 }
 
-                // ORDENAMIENTO COMPUESTO REQUERIDO: 
-                // 1º Por Nota (De Mayor a Menor)
-                // 2º Por Tiempo (De Menor a Mayor en caso de notas iguales)
+                // ORDENAMIENTO COMPUESTO: Nota desc / Tiempo asc
                 data.sort((a, b) => {
                     const notaA = parseFloat(String(a.nota).replace(',', '.'));
                     const notaB = parseFloat(String(b.nota).replace(',', '.'));
 
                     if (notaB !== notaA) {
-                        return notaB - notaA; // Ordena descendente por nota
+                        return notaB - notaA;
                     } else {
-                        // Si las notas son idénticas, desempata por tiempo (menor tiempo es mejor)
                         return convertirTiempoASegundos(a.tiempo) - convertirTiempoASegundos(b.tiempo);
                     }
                 });
 
-                // Extraemos estrictamente a los 3 mejores tras el nuevo ordenamiento compuesto
                 const top3 = data.slice(0, 3);
 
                 top3.forEach((alumno, index) => {
@@ -411,4 +487,3 @@
     </script>
 </body>
 </html>
-
