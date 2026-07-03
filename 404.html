@@ -272,4 +272,120 @@
     </main>
 
 </body>
+    <body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-layout">
+                <span>🏆 Cuadro de Honor IPCHILE</span>
+            </div>
+            <div class="title-layout">
+                <h1>Podio de Excelencia Académica</h1>
+                <p>Top 3 Histórico de Evaluaciones Simuladas &bull; 2026</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>📜 Normativa Industrial</h2>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center; width: 15%;">Pos</th>
+                        <th style="text-align: left; width: 45%;">Nombre Alumno</th>
+                        <th style="text-align: center; width: 13%;">Pts</th>
+                        <th style="text-align: center; width: 13%;">Nota</th>
+                        <th style="text-align: center; width: 14%;">Tiempo</th>
+                    </tr>
+                </thead>
+                <tbody id="podio-normativa">
+                    <tr>
+                        <td colspan="5" class="loading">🔄 Cargando podio de normativa...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>⚡ Instrumentación Industrial</h2>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center; width: 15%;">Pos</th>
+                        <th style="text-align: left; width: 45%;">Nombre Alumno</th>
+                        <th style="text-align: center; width: 13%;">Pts</th>
+                        <th style="text-align: center; width: 13%;">Nota</th>
+                        <th style="text-align: center; width: 14%;">Tiempo</th>
+                    </tr>
+                </thead>
+                <tbody id="podio-instrumentacion">
+                    <tr>
+                        <td colspan="5" class="loading">🔄 Cargando podio de instrumentación...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // ENDPOINTS CONFIGURADOS
+        const URL_NORMATIVA = "https://script.google.com/macros/s/AKfycbxXuHwc-oPc9Sf3sXf2M9HCkLjiuEEn0uLmRVn3EzNvFtihGtrI8PgtlRP5FBLWaj4EWw/exec";
+        const URL_INSTRUMENTACION = "https://script.google.com/macros/s/AKfycbw46HZO4J-9mJonYU_qB_fkW27jjZs6F-TO67abPBwksyknCi8Yu-eNT9WZpNsrHhSG/exec";
+
+        window.onload = () => {
+            // Cargar ambos podios simultáneamente de manera asíncrona
+            renderPodio(URL_NORMATIVA, "podio-normativa");
+            renderPodio(URL_INSTRUMENTACION, "podio-instrumentacion");
+        };
+
+        async renderPodio(url, elementId) {
+            const container = document.getElementById(elementId);
+            try {
+                const response = await fetch(url);
+                if(!response.ok) throw new Error("Error en respuesta de red.");
+                
+                const data = await response.json();
+                container.innerHTML = "";
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = `<tr><td colspan="5" class="loading">No hay registros aún.</td></tr>`;
+                    return;
+                }
+
+                // El backend ya suele ordenar los datos, pero garantizamos el filtrado del estricto TOP 3
+                const top3 = data.slice(0, 3);
+
+                top3.forEach((alumno, index) => {
+                    let posicion = "";
+                    if (index === 0) posicion = "🥇";
+                    else if (index === 1) posicion = "🥈";
+                    else if (index === 2) posicion = "🥉";
+
+                    const fila = document.createElement('tr');
+                    fila.className = "leaderboard-row";
+                    
+                    // Normalización de nota para determinar color estructural
+                    const notaNumerica = parseFloat(String(alumno.nota).replace(',', '.'));
+                    const colorNota = notaNumerica >= 4.0 ? 'var(--success-color)' : 'var(--error-color)';
+
+                    fila.innerHTML = `
+                        <td style="text-align: center; font-weight: 900; font-size: 1.25rem;">${posicion}</td>
+                        <td style="color: #1e293b; font-weight: 700;">${alumno.nombre}</td>
+                        <td style="text-align: center; font-weight: 900; color: #2563eb;">${alumno.puntaje}</td>
+                        <td style="text-align: center; font-weight: 900; color: ${colorNota};">${alumno.nota}</td>
+                        <td style="text-align: center; color: #64748b; font-size: 0.85rem; font-weight: 700;">⏱️ ${alumno.tiempo}</td>
+                    `;
+                    container.appendChild(fila);
+                });
+
+            } catch (err) {
+                console.error("Error al procesar el podio:", err);
+                container.innerHTML = `<tr><td colspan="5" class="error-msg">⚠️ Error al conectar con la base de datos.</td></tr>`;
+            }
+        }
+    </script>
+</body>
 </html>
