@@ -18,32 +18,32 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        /* Barra superior institucional agrupada a la izquierda */
+        /* Barra superior institucional totalmente centrada */
         .navbar {
             background-color: #004077; 
             border-bottom: 4px solid #f2ae1b; 
             color: white;
-            padding: 15px 20px;
+            padding: 20px;
             display: flex;
+            flex-direction: column; /* Alinea logo arriba y texto abajo en móviles */
             align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
         }
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
         .brand img {
-            height: 35px;
+            height: 40px;
             width: auto;
         }
         .nav-title {
-            text-align: left;
-            border-left: 1px solid rgba(255,255,255,0.3);
-            padding-left: 20px;
+            padding-top: 5px;
         }
         .nav-title h2 {
             font-size: 1.1rem;
@@ -101,20 +101,32 @@
         .btn:hover {
             background-color: #002d54;
         }
+        /* Botón de retorno al portal de estudios */
+        .btn-home {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #004077;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .btn-home:hover { 
+            text-decoration: underline; 
+        }
     </style>
     <script>
-        // Captura la URL errónea escrita por el alumno
+        // Si llegaron aquí la URL es incorrecta. Detectamos el destino deseado y redirigimos.
         var urlIncorrecta = window.location.href.toLowerCase();
 
-        // Redirección inmediata según la palabra clave detectada
         if (urlIncorrecta.includes("instind")) {
-            window.location.replace("https://merunaku.github.io/InstInd2026/");
+            window.location.replace("https://github.io");
         } 
         else if (urlIncorrecta.includes("normativa")) {
-            window.location.replace("https://merunaku.github.io/Normativa2026/");
+            window.location.replace("https://github.io");
         }
         else if (urlIncorrecta.includes("calculadora")) {
-            window.location.replace("https://merunaku.github.io/calculadora2026/");
+            window.location.replace("https://github.io");
         }
     </script>
 </head>
@@ -137,16 +149,19 @@
             <p>Por favor, selecciona la asignatura o herramienta a la que deseas acceder para comenzar. ¡Mucho éxito en tu evaluación!</p>
             
             <div class="button-group">
-                <a href="https://merunaku.github.io/InstInd2026/" class="btn">
+                <a href="https://github.io" class="btn">
                     Instrumentación Industrial 2026
                 </a>
-                <a href="https://merunaku.github.io/Normativa2026/" class="btn">
+                <a href="https://github.io" class="btn">
                     Normativa 2026
                 </a>
-                <a href="https://merunaku.github.io/calculadora2026/" class="btn">
+                <a href="https://github.io" class="btn">
                     Calculadora 2026
                 </a>
             </div>
+
+            <!-- Dirección fija actualizada para el retorno al portal -->
+            <a href="https://merunaku.github.io/ProfeDiego" class="btn-home">← Volver al Portal de Estudios</a>
         </div>
     </main>
 
