@@ -2,17 +2,153 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Redireccionando al Simulador...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada - ProfeDiego</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Barra superior idéntica a tu simulador */
+        .navbar {
+            background-color: #004077; /* Azul institucional */
+            border-bottom: 4px solid #f2ae1b; /* Línea amarilla */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .brand img {
+            height: 35px;
+            width: auto;
+        }
+        .nav-title {
+            text-align: right;
+        }
+        .nav-title h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .nav-title p {
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+        /* Contenedor de la tarjeta */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        .card h1 {
+            color: #004077;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        /* Botones institucionales */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn {
+            display: block;
+            background-color: #004077;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 14px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background-color: #002d54;
+        }
+        .btn-secondary {
+            background-color: #f2ae1b;
+            color: #004077;
+        }
+        .btn-secondary:hover {
+            background-color: #d69813;
+        }
+    </style>
     <script>
-        var currentUrl = window.location.href;
-        // Si el alumno escribió el repositorio en minúsculas, lo corregimos
-        if (currentUrl.toLowerCase().includes("/instind2026")) {
-            window.location.replace("https://merunaku.github.io/InstInd2026/");
-        } else {
-            document.write("<h1>Página no encontrada. Verifica el enlace.</h1>");
+        // Sistema de redirección automática invisible para los alumnos
+        var currentUrl = window.location.href.toLowerCase();
+
+        if (currentUrl.includes("/instind2026")) {
+            window.location.replace("https://github.io");
+        } 
+        else if (currentUrl.includes("/normativa2026")) {
+            window.location.replace("https://github.io");
         }
     </script>
 </head>
 <body>
+
+    <!-- Encabezado clonado de tu plataforma -->
+    <header class="navbar">
+        <div class="brand">
+            <!-- Carga el logo.png que está en la raíz de tu repositorio -->
+            <img src="/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
+            <span>ProfeDiego</span>
+        </div>
+        <div class="nav-title">
+            <h2>Evaluaciones 2026</h2>
+            <p>Plataforma del Estudiante • IPCHILE</p>
+        </div>
+    </header>
+
+    <!-- Tarjeta de Error / Navegación -->
+    <main class="main-container">
+        <div class="card">
+            <h1>Enlace no encontrado</h1>
+            <p>La dirección que ingresaste no es correcta. Por favor, selecciona la asignatura a la que deseas acceder:</p>
+            
+            <div class="button-group">
+                <a href="https://github.io" class="btn">
+                    Instrumentación Industrial 2026
+                </a>
+                <a href="https://github.io" class="btn btn-secondary">
+                    Normativa 2026
+                </a>
+            </div>
+        </div>
+    </main>
+
 </body>
 </html>
