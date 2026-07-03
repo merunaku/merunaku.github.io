@@ -5,162 +5,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluaciones 2026 - ProfeDiego</title>
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            /* TUS COLORES ORIGINALES RECUPERADOS */
+            --primary-color: #003366;
+            --secondary-color: #f4b223;
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
             display: flex;
             flex-direction: column;
+            align-items: center;
             min-height: 100vh;
         }
-        /* Barra superior institucional totalmente centrada */
-        .navbar {
-            background-color: #004077; 
-            border-bottom: 4px solid #f2ae1b; 
+
+        /* ENCABEZADO CLÁSICO CLONADO DE TU EXAMEN */
+        header {
+            background-color: var(--primary-color);
             color: white;
-            padding: 20px;
-            display: flex;
-            flex-direction: column; /* Alinea logo arriba y texto abajo en móviles */
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 10px;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            font-size: 1.4rem;
-        }
-        .brand img {
-            height: 40px;
-            width: auto;
-        }
-        .nav-title {
-            padding-top: 5px;
-        }
-        .nav-title h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        .nav-title p {
-            font-size: 0.8rem;
-            color: #ddd;
-        }
-        /* Contenedor central */
-        .main-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .card {
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            max-width: 500px;
             width: 100%;
-            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--secondary-color);
         }
-        .card h1 {
-            color: #004077;
-            font-size: 1.8rem;
+
+        /* Contenedor interno que agrupa logo y textos sin dispersarse */
+        .header-container {
+            max-width: 600px;
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .brand-layout {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-layout img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .brand-layout span {
+            font-weight: bold;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+
+        .title-layout {
+            text-align: right;
+        }
+
+        .title-layout h1 { margin: 0; font-size: 1.3rem; }
+        .title-layout p { margin: 3px 0 0 0; font-size: 0.85rem; opacity: 0.9; }
+
+        /* Ajuste responsivo para celulares */
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-layout {
+                text-align: center;
+            }
+        }
+
+        /* Área de Contenido Principal */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px 0 20px 0;
+            flex-grow: 1;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 35px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { 
+            color: var(--primary-color); 
+            margin-top: 0; 
+            font-size: 1.6rem;
             margin-bottom: 12px;
         }
+
         .card p {
-            color: #555;
+            color: #555555;
             font-size: 1rem;
-            margin-bottom: 25px;
             line-height: 1.5;
+            margin-bottom: 25px;
         }
-        /* Grupo de botones unificados en azul institucional */
-        .button-group {
+
+        /* Lista de opciones para botones */
+        .options-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-        .btn {
+
+        /* Botones institucionales convertidos a enlaces con tu diseño base */
+        .btn-link {
             display: block;
-            background-color: #004077;
-            color: white;
+            background-color: #f0f4f8;
+            border: 2px solid #d0dbe5;
+            padding: 14px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.2s;
+        }
+
+        .btn-link:hover {
+            background-color: #e2ecf5;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Botón inferior de retorno al portal estilo enlace discreto */
+        .btn-home {
+            display: inline-block;
+            margin-top: 25px;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
-            padding: 14px;
-            border-radius: 6px;
-            transition: background 0.2s ease;
-            font-size: 1rem;
-        }
-        .btn:hover {
-            background-color: #002d54;
-        }
-        /* Botón de retorno al portal de estudios */
-        .btn-home {
-            display: block;
-            text-align: center;
-            margin-top: 25px;
-            color: #004077;
-            text-decoration: none;
-            font-weight: 600;
             font-size: 0.95rem;
+            transition: color 0.2s;
         }
         .btn-home:hover { 
             text-decoration: underline; 
+            color: #002244;
         }
     </style>
     <script>
-        // Si llegaron aquí la URL es incorrecta. Detectamos el destino deseado y redirigimos.
+        // Si llegaron aquí la URL es incorrecta. Detecta el destino por palabra clave y redirige inmediatamente.
         var urlIncorrecta = window.location.href.toLowerCase();
 
-        if (urlIncorrecta.includes("instind")) {
-            window.location.replace("https://github.io");
+        if (urlIncorrecta.includes("calculadora")) {
+            window.location.replace("https://merunaku.github.io/calculadora2026/");
+        }
+        else if (urlIncorrecta.includes("instind")) {
+            window.location.replace("https://merunaku.github.io/InstInd2026/");
         } 
         else if (urlIncorrecta.includes("normativa")) {
-            window.location.replace("https://github.io");
-        }
-        else if (urlIncorrecta.includes("calculadora")) {
-            window.location.replace("https://github.io");
+            window.location.replace("https://merunaku.github.io/Normativa2026/");
         }
     </script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="brand">
-            <img src="/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
-            <span>ProfeDiego</span>
-        </div>
-        <div class="nav-title">
-            <h2>Plataforma de Estudios 2026</h2>
-            <p>Portal del Estudiante • IPCHILE</p>
+    <!-- Encabezado clásico unificado -->
+    <header>
+        <div class="header-container">
+            <div class="brand-layout">
+                <img src="/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
+                <span>ProfeDiego</span>
+            </div>
+            <div class="title-layout">
+                <h1>Plataforma de Estudios 2026</h1>
+                <p>Portal del Estudiante • IPCHILE</p>
+            </div>
         </div>
     </header>
 
-    <main class="main-container">
+    <!-- Contenedor de la Tarjeta Central -->
+    <main class="container">
         <div class="card">
-            <h1>¡Te damos la bienvenida!</h1>
+            <h2>¡Te damos la bienvenida!</h2>
             <p>Por favor, selecciona la asignatura o herramienta a la que deseas acceder para comenzar. ¡Mucho éxito en tu evaluación!</p>
             
-            <div class="button-group">
-                <a href="https://github.io" class="btn">
+            <div class="options-list">
+                <a href="https://merunaku.github.io/calculadora2026/" class="btn-link">
+                    Calculadora 2026
+                </a>
+                <a href="https://merunaku.github.io/InstInd2026/" class="btn-link">
                     Instrumentación Industrial 2026
                 </a>
-                <a href="https://github.io" class="btn">
+                <a href="https://merunaku.github.io/Normativa2026/" class="btn-link">
                     Normativa 2026
-                </a>
-                <a href="https://github.io" class="btn">
-                    Calculadora 2026
                 </a>
             </div>
 
-            <!-- Dirección fija actualizada para el retorno al portal -->
+            <!-- Enlace de retorno fijo y directo -->
             <a href="https://merunaku.github.io/ProfeDiego" class="btn-home">← Volver al Portal de Estudios</a>
         </div>
     </main>
