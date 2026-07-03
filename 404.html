@@ -272,7 +272,7 @@
     </main>
 
 
-    <header>
+<header>
         <div class="header-container">
             <div class="brand-layout">
                 <span>🏆 Cuadro de Honor IPCHILE</span>
@@ -329,21 +329,21 @@
     </div>
 
     <script>
-        // ENDPOINTS CONFIGURADOS
+        // CONFIGURACIÓN DE LAS URLS DE GOOGLE SHEETS ENVIADAS POR EL USUARIO
         const URL_NORMATIVA = "https://script.google.com/macros/s/AKfycbxXuHwc-oPc9Sf3sXf2M9HCkLjiuEEn0uLmRVn3EzNvFtihGtrI8PgtlRP5FBLWaj4EWw/exec";
         const URL_INSTRUMENTACION = "https://script.google.com/macros/s/AKfycbw46HZO4J-9mJonYU_qB_fkW27jjZs6F-TO67abPBwksyknCi8Yu-eNT9WZpNsrHhSG/exec";
 
         window.onload = () => {
-            // Cargar ambos podios simultáneamente de manera asíncrona
             renderPodio(URL_NORMATIVA, "podio-normativa");
             renderPodio(URL_INSTRUMENTACION, "podio-instrumentacion");
         };
 
-        async renderPodio(url, elementId) {
+        // CORRECCIÓN CRÍTICA: Sintaxis válida de función asíncrona estándar
+        async function renderPodio(url, elementId) {
             const container = document.getElementById(elementId);
             try {
                 const response = await fetch(url);
-                if(!response.ok) throw new Error("Error en respuesta de red.");
+                if(!response.ok) throw new Error("Error de red");
                 
                 const data = await response.json();
                 container.innerHTML = "";
@@ -353,7 +353,7 @@
                     return;
                 }
 
-                // El backend ya suele ordenar los datos, pero garantizamos el filtrado del estricto TOP 3
+                // Tus scripts de Apps Script ya ordenan y cortan, pero forzamos el Top 3 por si acaso
                 const top3 = data.slice(0, 3);
 
                 top3.forEach((alumno, index) => {
@@ -365,7 +365,7 @@
                     const fila = document.createElement('tr');
                     fila.className = "leaderboard-row";
                     
-                    // Normalización de nota para determinar color estructural
+                    // Manejo del cambio de coma a punto decimal para validar aprobaciones
                     const notaNumerica = parseFloat(String(alumno.nota).replace(',', '.'));
                     const colorNota = notaNumerica >= 4.0 ? 'var(--success-color)' : 'var(--error-color)';
 
