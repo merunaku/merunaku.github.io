@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluaciones 2026 - ProfeDiego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* TUS COLORES ORIGINALES RECUPERADOS */
+            /* COLORES INSTITUCIONALES OPTIMIZADOS */
             --primary-color: #002b5c;
+            --primary-dark: #001a38;
             --secondary-color: #f4b223;
             --bg-color: #f7f9fc;
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --success-color: #28a745;
-            --error-color: #dc3545;
+            --text-color: #2c3e50;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+            /* Fondo vivo con transición suave de colores */
+            background: linear-gradient(-45deg, #e0f2fe, #fef3c7, #e0e7ff, #f0fdf4);
+            background-size: 400% 400%;
+            animation: gradientBg 12s ease infinite;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -28,17 +31,23 @@
             min-height: 100vh;
         }
 
-        /* ENCABEZADO CLÁSICO CLONADO DE TU EXAMEN */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            width: 100%;
-            padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-bottom: 5px solid var(--secondary-color);
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Contenedor interno que agrupa logo y textos sin dispersarse */
+        /* ENCABEZADO INSTITUCIONAL MEJORADO CON CONTRAS TE DE ALTA GAMA */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            width: 100%;
+            padding: 18px 0;
+            box-shadow: 0 4px 20px rgba(0, 43, 92, 0.15);
+            border-bottom: 5px solid var(--secondary-color);
+            z-index: 10;
+        }
+
         .header-container {
             max-width: 600px;
             width: 90%;
@@ -47,7 +56,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .brand-layout {
@@ -60,12 +69,12 @@
             height: 38px;
             width: auto;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
         .brand-layout span {
-            font-weight: bold;
-            font-size: 1.15rem;
+            font-weight: 900;
+            font-size: 1.25rem;
             letter-spacing: 0.5px;
         }
 
@@ -73,103 +82,144 @@
             text-align: right;
         }
 
-        .title-layout h1 { margin: 0; font-size: 1.3rem; }
-        .title-layout p { margin: 3px 0 0 0; font-size: 0.85rem; opacity: 0.9; }
-
-        /* Ajuste responsivo para celulares */
-        @media (max-width: 480px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-layout {
-                text-align: center;
-            }
+        .title-layout h1 { 
+            margin: 0; 
+            font-size: 1.35rem; 
+            font-weight: 900;
+        }
+        
+        .title-layout p { 
+            margin: 3px 0 0 0; 
+            font-size: 0.85rem; 
+            font-weight: 700;
+            color: #cbd5e1; 
         }
 
-        /* Área de Contenido Principal */
+        @media (max-width: 480px) {
+            .header-container { flex-direction: column; text-align: center; }
+            .title-layout { text-align: center; }
+        }
+
+        /* CONTENEDOR CENTRAL - GLASSMORPHISM PREMIUM */
         .container {
             width: 90%;
-            max-width: 600px;
-            margin: 40px 0 20px 0;
+            max-width: 550px;
+            margin: auto 0;
+            padding: 40px 0;
             flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 35px;
-            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 32px;
+            box-shadow: 0 25px 60px -15px rgba(0, 43, 92, 0.12), 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            padding: 45px 35px;
+            width: 100%;
             box-sizing: border-box;
             text-align: center;
-            animation: fadeIn 0.4s ease;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            animation: cardEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         h2 { 
             color: var(--primary-color); 
             margin-top: 0; 
-            font-size: 1.6rem;
+            font-size: 2rem;
+            font-weight: 900;
             margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .card p {
-            color: #555555;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            color: #4b5563;
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 35px;
         }
 
-        /* Lista de opciones para botones */
+        /* LISTA DE BOTONES TOTALMENTE INTERACTIVOS */
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
 
-        /* Botones institucionales convertidos a enlaces con tu diseño base */
         .btn-link {
-            display: block;
-            background-color: #f0f4f8;
-            border: 2px solid #d0dbe5;
-            padding: 14px;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
             text-decoration: none;
             color: var(--text-color);
-            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .btn-link:hover {
-            background-color: #e2ecf5;
-            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-color: var(--secondary-color);
             color: var(--primary-color);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(244, 178, 35, 0.15);
         }
 
-        /* Botón inferior de retorno al portal estilo enlace discreto */
-        .btn-home {
-            display: inline-block;
-            margin-top: 25px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: color 0.2s;
+        .btn-link:active {
+            transform: translateY(-1px);
         }
+
+        /* RETORNO AL PORTAL ESTILO CÁPSULA DISCRETA */
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 35px;
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            border: 1.5px solid transparent;
+        }
+        
         .btn-home:hover { 
-            text-decoration: underline; 
-            color: #002244;
+            color: var(--primary-color);
+            background-color: #f1f5f9;
+            border-color: #e2e8f0;
         }
     </style>
     <script>
-        // Si llegaron aquí la URL es incorrecta. Detecta el destino por palabra clave y redirige inmediatamente.
+        // Lógica automática de enrutamiento inmediato intacta
         var urlIncorrecta = window.location.href.toLowerCase();
 
         if (urlIncorrecta.includes("calculadora")) {
@@ -185,7 +235,6 @@
 </head>
 <body>
 
-    <!-- Encabezado clásico unificado -->
     <header>
         <div class="header-container">
             <div class="brand-layout">
@@ -199,26 +248,26 @@
         </div>
     </header>
 
-    <!-- Contenedor de la Tarjeta Central -->
     <main class="container">
         <div class="card">
-            <h2>¡Te damos la bienvenida!</h2>
-            <p>Por favor, selecciona la asignatura o herramienta a la que deseas acceder para comenzar. ¡Mucho éxito en tu evaluación!</p>
+            <h2>👋 ¡Te damos la bienvenida!</h2>
+            <p>Por favor, selecciona la asignatura o herramienta a la que deseas acceder para comenzar. ¡Mucho éxito en tus procesos académicos!</p>
             
             <div class="options-list">
                 <a href="https://merunaku.github.io/calculadora2026/" class="btn-link">
-                    Calculadora 2026
+                    📊 Calculadora de Notas 2026
                 </a>
                 <a href="https://merunaku.github.io/InstInd2026/" class="btn-link">
-                    Instrumentación Industrial 2026
+                    ⚙️ Instrumentación Industrial 2026
                 </a>
                 <a href="https://merunaku.github.io/Normativa2026/" class="btn-link">
-                    Normativa 2026
+                    📜 Normativa Industrial 2026
                 </a>
             </div>
 
-            <!-- Enlace de retorno fijo y directo -->
-            <a href="https://merunaku.github.io/ProfeDiego" class="btn-home">← Volver al Portal de Estudios</a>
+            <a href="https://merunaku.github.io/ProfeDiego" class="btn-home">
+                🗂️ Volver al Portal General
+            </a>
         </div>
     </main>
 
