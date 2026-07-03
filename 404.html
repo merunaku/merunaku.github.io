@@ -26,7 +26,7 @@
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Agrupa todo a la izquierda */
+            justify-content: center; /* Agrupa todo al centro */
             gap: 20px; /* Controla la distancia exacta entre el logo y el texto */
         }
         .brand {
@@ -102,8 +102,33 @@
             background-color: #002d54;
         }
     </style>
-    <script>
-        // Redirecciones automáticas silenciosas en caso de errores de tipeo
+
+      <script>
+        // Conservamos la URL original con sus mayúsculas y minúsculas tal cual se escribieron
+        var originalUrl = window.location.href;
+        // Creamos una versión en minúsculas solo para la detección de la palabra clave
+        var lowerUrl = originalUrl.toLowerCase();
+
+        // 1. Si el alumno escribió mal las mayúsculas de Instrumentación
+        if (lowerUrl.includes("/instind2026") && !originalUrl.includes("/InstInd2026")) {
+            window.location.replace("https://github.io");
+        } 
+        // 2. Si el alumno escribió mal las mayúsculas de Normativa
+        else if (lowerUrl.includes("/normativa2026") && !originalUrl.includes("/Normativa2026")) {
+            window.location.replace("https://github.io");
+        }
+        // 3. Si el alumno escribió mal las mayúsculas de la Calculadora
+        else if (lowerUrl.includes("/calculadora2026") && !originalUrl.includes("/calculadora2026")) {
+            window.location.replace("https://github.io");
+        }
+    </script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <img src="/logo.p   <script>
+        // Redirecciones automáticas silenciosas en caso de errores de tipeo en la URL
         var currentUrl = window.location.href.toLowerCase();
 
         if (currentUrl.includes("/instind2026")) {
@@ -122,6 +147,11 @@
     <header class="navbar">
         <div class="brand">
             <img src="/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
+            <span>ProfeDiego</span>
+        </div>
+        <div class="nav-title">
+            <h2>Plataforma de Estudios 2026</h2>
+            <p>Portal deng" alt="Logo ProfeDiego" onerror="this.style.display='none'">
             <span>ProfeDiego</span>
         </div>
         <div class="nav-title">
