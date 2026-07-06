@@ -4,23 +4,41 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const headerHTML = `
-    <header>
-        <div class="header-container">
-            <div class="header-flex">
-                <div class="brand-layout">
-                    <!-- Usamos ruta absoluta para que cargue bien desde cualquier subcarpeta -->
-                    <img src="https://merunaku.github.io/ProfeDiego/logo.png" alt="Logo ProfeDiego" onerror="this.style.display='none'">
-                    <span>ProfeDiego</span>
-                </div>
-                <div class="title-layout">
-                    <h1>Plataforma de Estudios 2026</h1>
-                    <p>Portal del Estudiante • IPCHILE</p>
-                </div>
-            </div>
-        </div>
-    </header>`;
+    // Detectamos la URL completa actual y la pasamos a minúsculas
+    const currentURL = window.location.href.toLowerCase();
     
-    // Inyecta el header justo al principio del elemento <body>
-    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+    // Título por defecto (en caso de que estén en la raíz o en la 404)
+    let tituloDinamico = "Plataforma de Estudios 2026"; 
+
+    // Condicionales exactas para cada una de tus páginas
+    if (currentURL.includes("normativa")) {
+        tituloDinamico = "Normativa Eléctrica 2026";
+    } else if (currentURL.includes("instind") {
+        tituloDinamico = "Instrumentación Eléctrica 2026";
+    } else if (currentURL.includes("calculadora")) {
+        tituloDinamico = "Calculadora de Notas 2026";
+    } else if (currentURL.includes("404") || currentURL.endsWith("github.io/")) {
+        tituloDinamico = "Plataforma de Estudios 2026 &bull; IPCHILE";
+    }
+
+    // Inyección del HTML en el contenedor correspondiente
+    const headerContainer = document.getElementById("global-header");
+    if (headerContainer) {
+        headerContainer.innerHTML = `
+            <header>
+                <div class="header-container">
+                    <div class="brand-layout" style="cursor: pointer;" onclick="window.location.href='https://merunaku.github.io/404.html'">
+                        <img src="https://merunaku.github.io/ProfeDiego/logo.png" alt="Logo" onerror="this.style.display='none'">
+                        <span>ProfeDiego</span>
+                    </div>
+                    <div class="title-layout">
+                        <h1>${tituloDinamico}</h1>
+                        <p>Herramientas del Estudiante &bull; IPCHILE</p>
+                    </div>
+                </div>
+            </header>
+                document.body.insertAdjacentHTML('afterbegin', headerHTML);
+
+        `;
+    }
 });
